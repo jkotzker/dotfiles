@@ -204,6 +204,11 @@ apps=(
   platypus
   royal-tsx-beta
   yasu
+  seashore
+  startninja
+  omnidisksweeper
+  radiant-player
+  torbrowser
 )
 
 qlplugins=(
@@ -240,8 +245,8 @@ echo "installing fonts..."
 brew cask install ${fonts[@]}
 
 echo "Don't forget to install:"
-echo "Mac App Store: Chatty, Pocket, Reeder, Pushpal, Pushbullet, Dashlane, Simplenote, Monity, Amphetamine, Degrees, Quip, NetSpeedy, NetWorkUtilityX, invisible, netview, Popclip, yoink, neptunes, monosnap, simplify"
-echo "Web: ChitChat, Fantastical, Sunrise, Capster, cDock2, SIMBL and plugins"
+echo "Mac App Store: Chatty, Pocket, Reeder, Pushpal, Pushbullet, Dashlane, Simplenote, Monity, Amphetamine, Degrees, Quip, NetSpeedy, NetWorkUtilityX, invisible, netview, Popclip, yoink, neptunes, monosnap, simplify, monthlycal, movie explorer"
+echo "Web: ChitChat, Sunrise, Capster, cDock2, SIMBL and plugins"
 echo "Download MSOffice for free from Student"
 echo "Also, set up TorGuard VPN"
 
