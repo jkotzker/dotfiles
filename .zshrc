@@ -1,63 +1,58 @@
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+export ZSH=$HOME/.dotfiles/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="gallifrey"
+# Themes in ~/.oh-my-zsh/themes/, or oh-my-zsh themes dir
+ZSH_THEME="fishy"
+# ZSH_THEME="punctual"
 
-# Auto-update (in days).
-# export UPDATE_ZSH_DAYS=5
+# Autoupdate freq in days
+export UPDATE_ZSH_DAYS=7
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
 
-# Uncomment the following line to display red dots whilst waiting for completion.
+# Self explanatory, indicates waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
-#timestamp format in history
-HIST_STAMPS="mm/dd/yyyy"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-extras github forklift atom brew brew-cask osx python pip torrent adb sublime common-aliases)
+# Shell plugins to load, in custom dir or main plugins dir
+plugins=(git git-extras github forklift atom brew brew-cask osx python pip torrent common-aliases my_common_aliases)
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-export PATH="/usr/local/sbin:$PATH"
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
-
-# add git-radar prompt
-export PROMPT="%1/%$(git-radar --zsh --fetch) "
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/Users/josephkotzker/.dotfiles/bin:/usr/macbin"
+export PATH="$PATH:$(brew --prefix coreutils)/libexec/gnubin:/usr/local/opt/findutils/libexec/gnubin"
+export MANPATH="/usr/local/man:$MANPATH"
+export MANPATH="/usr/local/opt/findutils/libexec/gnuman:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+
+build_prompt() {
+  RETVAL=$?
+  prompt_status
+  prompt_virtualenv
+  prompt_context
+  prompt_dir
+  prompt_end
+}
+
+## export PROMPT="$PROMPT\$(git-radar --zsh --fetch) "
+
+
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='vim'
+fi
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# Personal aliases
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+## eval "$(perl -I "$HOME/.perl5/lib/perl5" -Mlocal::lib)"
 
-alias flushdns="sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder;echo 'DNS cache flushed.'"
-alias runscripts="sudo periodic daily weekly monthly"
-#alias reperms="sudo diskutil repairPermissions /"
-alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
-alias mounted="mount | column -t"
-alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
-alias imgur-screenshot='imgur-screenshot.sh'
+# VirtualENV config for Python
+export WORKON_HOME=~/.Envs
+source /usr/local/bin/virtualenvwrapper.sh
